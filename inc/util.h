@@ -13,5 +13,5 @@ typedef struct {
 } duration_t;
 
 duration_t convert_to_days(double seconds);
-void get_board_info();
+int get_board_info();
 #endif

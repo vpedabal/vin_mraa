@@ -1,6 +1,7 @@
-#include <stdio.h>
-#include "util.h"
 #include <mraa.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <util.h>
 
 duration_t convert_to_days(double seconds)
 {
@@ -13,14 +14,29 @@ duration_t convert_to_days(double seconds)
     seconds = seconds/60;
     duration.hours  = (unsigned long int)(seconds) % 24;
     seconds = seconds/24;
-    duration.days   = (unsigned long int)(seconds);    
+    duration.days   = (unsigned long int)(seconds);
     return duration;
 }
 
-void get_board_info()
+int get_board_info()
 {
     char* board_name = mraa_get_platform_name();
-    fprintf(stdout, "hello mraa\n Version: %s\n Running on %s\n", mraa_get_version(), board_name);
+    char *output1;
+    char *output2;
+    int i,col=0;
+    asprintf(&output1, "Version: %s|\n",mraa_get_version());
+    asprintf(&output2, "Running on %s|\n", board_name);
+    col = strlen(output1)-1;
+    if(col < strlen(output2))
+      col = strlen(output2);
+    for(i=0;i<col;i++)
+     fprintf(stdout,"-");
+    fprintf(stdout,"|\n");
+    fprintf(stdout,output1,"|\n");
+    fprintf(stdout,output2,"|\n");
+    for(i=0;i<col;i++)
+      fprintf(stdout,"-");
+    fprintf(stdout,"|\n");
     mraa_deinit();
     return MRAA_SUCCESS;
 }

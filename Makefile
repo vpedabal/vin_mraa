@@ -2,10 +2,9 @@ PROG = bin/prog
 BIN_DIR = bin/
 SRC_DIR = src/
 OBJ_DIR = obj/
-INC_DIR = -I/. -I/usr/local/include -I/home/vpedabal/new_ipmiutil/include -I/home/vpedabal/new_ipmiutil/share/ipmiutil
-LIB_DIR = -L/usr/lib64 -L/home/vpedabal/new_ipmiutil/lib
-EXTRA_LIBS = -lmraa
-PROG_NAME = prog
+INC_DIR = -I/. -Iinc/. -I/usr/local/include -I/usr/include
+LIB_DIR = -L/usr/lib
+EXTRA_LIBS = -lmraa -lcurses
 CC = gcc
 
 _OBJS = setpwm.o util.o main.o 
