@@ -2,12 +2,12 @@ PROG = bin/prog
 BIN_DIR = bin/
 SRC_DIR = src/
 OBJ_DIR = obj/
-INC_DIR = -I/. -Iinc/. -I/usr/local/include -I/usr/include
+INC_DIR = -I/. -Iinc/. -Isrc/. -I/usr/local/include -I/usr/include
 LIB_DIR = -L/usr/lib
 EXTRA_LIBS = -lmraa -lcurses
 CC = gcc
 
-_OBJS = setpwm.o util.o main.o 
+_OBJS = i2cio.o setpwm.o util.o main.o 
 OBJS = $(patsubst %,$(OBJ_DIR)%,$(_OBJS))
 
 all: DIR $(OBJS)

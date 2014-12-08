@@ -1,9 +1,12 @@
 #include <util.h>
-#include <setpwm.h>
+#include "setpwm.h"
+#include <mraa.h>
 
 #define Tperiod (unsigned long)21500000
 #define Tmin    (unsigned long)360000
 #define Tmax    (unsigned long)1900000
+
+mraa_pwm_context pwm;
 
 void pwm_exec(char **argv, int argc)
 {
@@ -42,5 +45,12 @@ void set_pwm(int pwm_channel, unsigned long duty_cycle, unsigned long period)
   printf("PWM Channel : %d\n", pwm_channel);
   printf("duty_cycle  : %lu\n", duty_cycle);
   printf("Period      : %lu\n", period);
+
+  pwm = mraa_pwm_init(2);
+  if(pwm == NULL) {
+    printf("Initializing pwm channel 2 failed\n");
+  }
+  mraa_pwm_period_us(pwm,21500);
+  mraa_pwm_enable(pwm,1);
   return;
 }
