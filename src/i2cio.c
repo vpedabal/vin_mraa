@@ -5,11 +5,11 @@
 
 mraa_i2c_context i2c;
 #define I2C_IO_EXPANDER_ADDR 0x20
-
+#define I2C_PORT 1
 void set_io(unsigned char out)
 {
   int ret = 0;
-  i2c = mraa_i2c_init(6);
+  i2c = mraa_i2c_init(I2C_PORT);
   mraa_i2c_address(i2c, I2C_IO_EXPANDER_ADDR);
 
   if(MRAA_SUCCESS != (ret=mraa_i2c_write_byte(i2c,out)))
@@ -21,7 +21,7 @@ void set_io(unsigned char out)
 
 unsigned char get_io()
 {
-  i2c = mraa_i2c_init(6);
+  i2c = mraa_i2c_init(I2C_PORT);
   mraa_i2c_address(i2c,I2C_IO_EXPANDER_ADDR);
   return mraa_i2c_read_byte(i2c);
 
@@ -31,7 +31,7 @@ void set_gpio(char gpio, bool gpio_state)
 {
   int ret = 0;
   unsigned char cur_pinout;
-  i2c = mraa_i2c_init(6);
+  i2c = mraa_i2c_init(I2C_PORT);
   mraa_i2c_address(i2c,I2C_IO_EXPANDER_ADDR);
   cur_pinout = get_io();
 
